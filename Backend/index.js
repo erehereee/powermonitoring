@@ -1,14 +1,19 @@
+const mqttServices = require('./services/mqttServices');
 const express = require('express');
 const app = express();
 const port = 3000;
-const getData = require('./router/router');
 
-app.use(express.json());
+const MQTT_HOST_NAME = "mqtt://127.0.0.1:1883";
 
-app.get('/', (req, res) => {
-    res.send("Hello World");
+const mqttClient = new mqttServices(MQTT_HOST_NAME);
+
+mqttClient.connect();
+
+mqttClient.subscribe("data/pm/ATS", (err) => {
+    if(!err) {
+        console.log("Connected");
+    }
 });
 
-app.use('/users', getData);
 
-app.listen(port, console.log(`Server listening at port ${port}`));
+app.listen(port, console.log(`Server listening on port : ${port}`));
