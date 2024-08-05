@@ -38,7 +38,7 @@ mongoServices.prototype.readData = async function(collection) {
     const colect = this.dbName.collection(collection);
     try {
         const findResult = await colect.find().toArray();
-        console.log('Found documents =>', findResult);
+        return findResult;
     }
     catch (error) {
         if (error) {

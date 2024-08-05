@@ -4,7 +4,7 @@ const mongoServices = require('../helper/helpermongo');
 const db = new mongoServices('power');
 const collection = 'data';
 
-db.connect();
+// db.connect();
 
 function mqttServices(host) {
     this.mqttClient = null;

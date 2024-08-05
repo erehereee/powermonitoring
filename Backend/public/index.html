@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Monitoring PT.Sasa Inti</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <div class="header">
+                <a href="index.html">
+                    <img src="assets/img/substation.png" alt="" class="icon">
+                    <span>Power Monitoring</span>
+                </a>
+            </div>
+            <div class="illustration">
+                <img src="" alt="">
+            </div>
+            <div class="main-menu">
+                <div class="menu">
+                    <a href="index.html">
+                        <img src="assets/img/dashboard.png" alt="" class="icon">
+                        <span class="description">Dashboard</span>
+                    </a>
+                </div>
+                <div class="menu">
+                    <a href="plant.html">
+                        <img src="assets/img/plant.png" alt="" class="icon">
+                        <span class="description">Plant Monitoring</span>
+                    </a>
+                </div>
+                <div class="menu-list hide" id="energy-list">
+                    <a href="#">
+                        <img src="assets/img/energy.png" alt="" class="icon">
+                        <span class="description">Energy Monitoring</span>
+                    </a>
+                    <div class="list-item hide" id="energy-list-item">
+                        <a href="energy-pln.html">
+                            <li>PLN</li>
+                        </a>
+                        <a href="energy-genset.html">
+                            <li>Genset</li>
+                        </a>
+                    </div>
+                </div>
+                <div class="menu">
+                    <a href="report.html">
+                        <img src="assets/img/report.png" alt="" class="icon">
+                        <span class="description">Report</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="header-dashboard">
+                <div class="hamburger">
+                    <div class="menu" id="hamburger-button">
+                        <img src="assets/img/hamburger.png" alt="" class="small-icon">
+                    </div>
+                    <div class="power-state">
+                        Power State :
+                        <span>PLN</span>
+                    </div>
+                </div>
+                <div class="utility">
+                    <div class="alarm">
+                        <a href="">
+                            <img src="assets/img/alarm.png" alt="" class="small-icon">
+                        </a>
+                    </div>
+                    <div class="user">
+                        <a href="">
+                            <img src="assets/img/user.png" alt="" class="small-icon">
+                        </a>
+                    </div>
+                    <div class="user-information">
+                        <span>Username</span>
+                    </div>
+                </div>
+            </div>
+            <div class="main-dashboard">
+                <div class="selector">
+                    <div class="title">
+                        <h3>Voltage/Current 1 Phase</h3>
+                    </div>
+                    <button class="phase3" id="change-button">
+                        CHANGE
+                    </button>
+                </div>
+                <div class="power-monitoring">
+                    <div class="top">
+                        <div class="gauge-1phase hide">
+                            <div class="card">
+                                <div class="card-header">
+                                    R-N Voltage
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    R-N Current
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    S-N Voltage
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    S-N Current
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    T-N Voltage
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    T-N Current
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                        </div>
+                        <div class="gauge-3phase">
+                            <div class="card">
+                                <div class="card-header">
+                                    R-S Voltage
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    R-S Current
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    S-T Voltage
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    S-T Current
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    T-R Voltage
+                                </div>
+                                <div class="card-body">
+                                    Lorem
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header">
+                                    T-R Current
+                                </div>
+                                <div class="card-body" id="T-R">
+                                    Lorem
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="selector">
+                    <div class="title">
+                        <h3>Energy Monitoring</h3>
+                    </div>
+                </div>
+                <div class="energy-monitoring">
+                    <div class="left">
+                        <div class="card">
+                            <div class="card-header">
+                                S-T Voltage
+                            </div>
+                            <div class="card-body">
+                                Lorem
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                S-T Current
+                            </div>
+                            <div class="card-body">
+                                Lorem
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                T-R Voltage
+                            </div>
+                            <div class="card-body">
+                                Lorem
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                T-R Current
+                            </div>
+                            <div class="card-body">
+                                Lorem
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <canvas
+                        id="energy-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

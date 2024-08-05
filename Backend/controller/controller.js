@@ -1,6 +1,10 @@
 const { password } = require('pg/lib/defaults');
 const bcrypt = require('bcrypt');
 const pool = require('../helper/helperdb');
+const mongoServices = require('../helper/helpermongo');
+
+const db = new mongoServices('power');
+const collection = 'data';
 
 const getUser = (req, res) => {
     pool.query("SELECT * FROM users", (error, results) => {
@@ -44,9 +48,25 @@ const UserLogIn = async (req, res) => {
 
 }
 
+const getData = async (req, res) => {
+    try {
+        const data = await db.readData(collection);
+        const month = "Aug"; // Bulan yang ingin difilter
+        const filteredData = data.filter(doc => doc.data.date.includes("08"));
+        
+        if (filteredData.length === 0) {
+            return res.status(404).send('No data found for the specified month.');
+        }
+        return res.send(filteredData);
+    } catch (error) {
+        console.error('Error fetching data:', error);
+        res.status(500).send('An error occurred while fetching data.');
+    }
+}
 
 module.exports = {
     getUser,
     UserSignUp,
     UserLogIn,
+    getData
 };
