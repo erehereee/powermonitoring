@@ -9,6 +9,7 @@ const router = require('./router/router')
 const { AuthUser } = require('./controller/controller');
 const port = 3000;
 const cors = require('cors');
+const { url } = require('inspector');
 
 const MQTT_HOST_NAME = "mqtt://127.0.0.1:1883";
 
@@ -21,14 +22,21 @@ const mqttClient = new mqttServices(MQTT_HOST_NAME);
 //         console.log("Connected");
 //     }
 // });
-
-app.use(cors());
+app.set('view engine', 'ejs')
 app.use(express.static('public'))
+app.use(express.urlencoded({ extended: false }))
+app.use(cors());
 app.use(express.json());
-app.use('/', router);
 
-console.log(__dirname);
+app.get('/login', (req, res) => {
+    res.render('index')
+})
 
+app.get('/dashboard', (req, res) => {
+    res.render('dashboard')
+})
+
+app.use('/user', router);
 
 // io.on("connect", socket => {
 //     console.log(`Socket Connected : ${socket.id}`)

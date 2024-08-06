@@ -5,10 +5,7 @@ const pool = require('../helper/helperdb');
 
 // const db = new mongoServices('power');
 // const collection = 'data';
-
-let userState = false;
-let admin = false;
-
+let userState = [];
 const getUser = (req, res) => {
     pool.query("SELECT * FROM users", (error, results) => {
         if (error) throw error;
@@ -35,51 +32,58 @@ const UserLogIn = async (req, res) => {
     const {username, password} = req.body;
     pool.query("SELECT * from users", async (error, results) => {
         if (error) throw error;
-        const userInfo = results.rows.find(user => user.username === username);
+        userState = results.rows.find(user => user.username === username);
         try {
-            if(await bcrypt.compare(password, userInfo.password)) {
-                res.send({message : "Login Successfully"});
-                userState = true;
-                res.redirect('dashboard')
-                if(userInfo.role == 'ADMIN') {
-                    return admin = true;
-                }
-                else {
-                    return admin = false;
-                }
+            if(await bcrypt.compare(password, userState.password)) {
+                res.redirect('/dashboard');
+                req.msg = "Login Successfully";
+                console.log(req.msg);
             }
             else {
-                res.send({message : "Login Failed"});
+                req.msg = "Wrong password";
+                console.log(req.msg);
             }
         }
         catch {
-            res.status(500).send();
+            req.msg = "User not found";
+            res.redirect('/login');
+            res.status(500)
+            console.log(req.msg)
         }
     });
 
 }
 
 const UserLogout = (req, res) => {
-    if(!admin && !userState) {
-        console.log("You not login");
+    if(userState.length < 1) {
+        res.redirect('/login')
+        req.msg = "User not found. You must be login.";
+        console.log(req.msg);
     }
-    return admin = false, userState = false
+    else {
+        userState = [];
+        res.redirect('/login')
+        req.msg = "Logout Successfully";
+        console.log(req.msg)
+    }
 }
 
 function AuthUser (req, res, next) {
-    if(!userState) {
-        res.status(403)
-        return res.send("You need to sign in")
+    if(userState.username == null) {
+        req.msg = "You must sign in.";
+        console.log(req.msg)
     }
     next();
 }
 
-function AuthRole (req, res, next) {
-        if(!admin) {
-            res.status(403)
+function AuthRole (role) {
+        return (req, res, next) => {
+            if(userState.role !== role) {
+            res.status(401)
             return res.send("You not have permission to access this.")
         }
         next();
+}
 }
 
 const getData = async (req, res) => {
