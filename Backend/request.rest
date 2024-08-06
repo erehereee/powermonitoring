@@ -1,4 +1,28 @@
-GET http://localhost:3000/energy-pln.html
+GET http://localhost:3000/get
 
+###
 
+GET http://localhost:3000/data
+###
+POST http://localhost:3000/add
+Content-Type: application/json
 
+{
+    "username" : "operator",
+    "password" : "root",
+    "role"     : "BASIC"
+}
+
+###
+
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+    "username" : "administor",
+    "password" : "root"
+}
+
+###
+
+GET  http://localhost:3000/logout

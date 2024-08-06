@@ -1,10 +1,16 @@
 const mqtt = require('mqtt');
-const mongoServices = require('../helper/helpermongo');
+const { password } = require('pg/lib/defaults');
+// const mongoServices = require('../helper/helpermongo');
 
-const db = new mongoServices('power');
-const collection = 'data';
+// const db = new mongoServices('power');
+// const collection = 'data';
 
 // db.connect();
+
+const option = {
+    username : 'ereh',
+    password : 'ereh'
+}
 
 function mqttServices(host) {
     this.mqttClient = null;
@@ -12,7 +18,7 @@ function mqttServices(host) {
 }
 
 mqttServices.prototype.connect = function() {
-    this.mqttClient = mqtt.connect(this.host);
+    this.mqttClient = mqtt.connect(this.host, option);
 
     this.mqttClient.on("error", (err) => {
         console.log(err);
@@ -24,10 +30,10 @@ mqttServices.prototype.connect = function() {
     })
 
     this.mqttClient.on("message", (topic, message) => {
-        db.insertData(collection,[{
-            data : message.toString()
-        }])
-        console.log('Data successfully added');
+        // db.insertData(collection,[{
+        //     data : message.toString()
+        // }])
+        console.log(JSON.parse(message));
     })
 
     this.mqttClient.on("close", () => {
