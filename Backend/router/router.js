@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
-const {UserLogout, AuthUser, AuthRole, getUser, UserLogIn, UserSignUp, getData} = require('../controller/controller');
-router.get('/get',AuthUser, getUser);
+const {UserLogout, AuthUser, AuthRole, UserLogIn, UserSignUp, getData} = require('../controller/controller');
+router.get('/get',AuthUser);
 router.post('/add', UserSignUp);
 router.post('/login', UserLogIn)
 router.get('/data', AuthUser, AuthRole("ADMIN"), getData)

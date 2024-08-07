@@ -1,16 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 700;
+  src: url('../assets/fonts/ubuntu-b-webfont.woff2') format('woff2'),
+       url('../assets/fonts/ubuntu-b-webfont.woff') format('woff');
+
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 500;
+  src: url('../assets/fonts/ubuntu-m-webfont.woff2') format('woff2'),
+       url('../assets/fonts/ubuntu-m-webfont.woff') format('woff');
+
+}
+
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/ubuntu-r-webfont.woff2') format('woff2'),
+       url('../assets/fonts/ubuntu-r-webfont.woff') format('woff');
+}
+
+:root {
+  --primary: rgb(219, 224, 228);
+    --secondary: rgb(223, 26, 26);
+}
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins',sans-serif;
+  font-family: 'Ubuntu';
 }
 body{
-  background: #1abc9c;
+  background: var(--primary);
   overflow: hidden;
 }
 ::selection{
-  background: rgba(26,188,156,0.3);
+  background: rgba(223, 26, 26, 0.3);
 }
 .container{
   max-width: 440px;
@@ -25,7 +55,7 @@ body{
 }
 .wrapper .title{
   height: 90px;
-  background: #16a085;
+  background: var(--secondary);
   border-radius: 5px 5px 0 0;
   color: #fff;
   font-size: 30px;
@@ -53,8 +83,8 @@ body{
   transition: all 0.3s ease;
 }
 form .row input:focus{
-  border-color: #16a085;
-  box-shadow: inset 0px 0px 2px 2px rgba(26,188,156,0.25);
+  border-color: var(--secondary);
+  box-shadow: inset 0px 0px 2px 2px rgba(223, 26, 26,0.25);
 }
 form .row input::placeholder{
   color: #999;
@@ -65,8 +95,8 @@ form .row input::placeholder{
   height: 100%;
   color: #fff;
   font-size: 18px;
-  background: #16a085;
-  border: 1px solid #16a085;
+  background: var(--secondary);
+  border: 1px solid var(--secondary);
   border-radius: 5px 0 0 5px;
   display: flex;
   align-items: center;
@@ -76,7 +106,7 @@ form .row input::placeholder{
   margin: -8px 0 20px 0;
 }
 .wrapper form .pass a{
-  color: #16a085;
+  color: var(--secondary);
   font-size: 17px;
   text-decoration: none;
 }
@@ -88,22 +118,10 @@ form .row input::placeholder{
   font-size: 20px;
   font-weight: 500;
   padding-left: 0px;
-  background: #16a085;
-  border: 1px solid #16a085;
+  background: var(--secondary);
+  border: 1px solid var(--secondary);
   cursor: pointer;
 }
 form .button input:hover{
-  background: #12876f;
-}
-.wrapper form .signup-link{
-  text-align: center;
-  margin-top: 20px;
-  font-size: 17px;
-}
-.wrapper form .signup-link a{
-  color: #16a085;
-  text-decoration: none;
-}
-form .signup-link a:hover{
-  text-decoration: underline;
+  background: rgb(136, 15, 15);
 }

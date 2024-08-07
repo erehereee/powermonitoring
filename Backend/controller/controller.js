@@ -6,6 +6,7 @@ const pool = require('../helper/helperdb');
 // const db = new mongoServices('power');
 // const collection = 'data';
 let userState = [];
+let userLogin = false
 const getUser = (req, res) => {
     pool.query("SELECT * FROM users", (error, results) => {
         if (error) throw error;
@@ -35,20 +36,25 @@ const UserLogIn = async (req, res) => {
         userState = results.rows.find(user => user.username === username);
         try {
             if(await bcrypt.compare(password, userState.password)) {
-                res.redirect('/dashboard');
+                res.redirect('/');
                 req.msg = "Login Successfully";
                 console.log(req.msg);
+                userLogin = true;
+                
             }
             else {
+                res.redirect('/login');
                 req.msg = "Wrong password";
                 console.log(req.msg);
+                userLogin = false;
             }
         }
         catch {
-            req.msg = "User not found";
             res.redirect('/login');
+            req.msg = "User not found";
             res.status(500)
             console.log(req.msg)
+            userLogin = false;
         }
     });
 
@@ -56,12 +62,14 @@ const UserLogIn = async (req, res) => {
 
 const UserLogout = (req, res) => {
     if(userState.length < 1) {
-        res.redirect('/login')
         req.msg = "User not found. You must be login.";
         console.log(req.msg);
+        userLogin = false;
+        res.redirect('/login') 
     }
     else {
         userState = [];
+        userLogin = false;
         res.redirect('/login')
         req.msg = "Logout Successfully";
         console.log(req.msg)
@@ -72,8 +80,20 @@ function AuthUser (req, res, next) {
     if(userState.username == null) {
         req.msg = "You must sign in.";
         console.log(req.msg)
+        res.redirect('/login')
     }
-    next();
+    else {
+        next();
+    }
+}
+
+function checkLogin (req, res, next) {
+    if(!userLogin) {
+        next();
+    }
+    else {
+        res.redirect('/')
+    }
 }
 
 function AuthRole (role) {
@@ -81,8 +101,9 @@ function AuthRole (role) {
             if(userState.role !== role) {
             res.status(401)
             return res.send("You not have permission to access this.")
+        }else {
+            next();
         }
-        next();
 }
 }
 
@@ -105,5 +126,6 @@ module.exports = {
     AuthUser,
     AuthRole,
     getData,
-    UserLogout
+    UserLogout,
+    checkLogin
 }
